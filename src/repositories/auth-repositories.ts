@@ -1,4 +1,4 @@
-import db from "../config/database";
+import db from "../config/database.js";
 
 async function validateToken(token: string) {
   return await db.query(`
@@ -7,10 +7,9 @@ async function validateToken(token: string) {
     JOIN sessions
         ON users.id = sessions."userId"
     WHERE sessions.token = $1;
-  `);
+  `, [token]);
 }
-
 
 export default {
-    validateToken
-}
+  validateToken,
+};
